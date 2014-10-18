@@ -15,14 +15,14 @@
 
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
-%define		src_ver	8u5
+%define		src_ver	8u25
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.05
+Version:	1.8.0.25
 Release:	0.1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -32,11 +32,14 @@ Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 Source0:	jdk-%{src_ver}-linux-i586.tar.gz
-# Source0-md5:	fb0e8b5c0be11521bccec5d667559e76
+# Source0-md5:	b5b16247f66643727d9b6d4bc7c5efda
 Source1:	jdk-%{src_ver}-linux-x64.tar.gz
-# Source1-md5:	adc3827532741873de9216a5aed883ed
+# Source1-md5:	e145c03a7edc845215092786bcfba77e
 Source2:	Test.java
 Source3:	Test.class
+# http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
+Source4:	jce_policy-8.zip
+# Source4-md5:	b3c7031bc65c28c2340302065e7d00d3
 Patch0:		%{name}-desktop.patch
 URL:		http://www.oracle.com/technetwork/java/javase/overview/index.html
 BuildRequires:	rpm >= 4.4.9-56
@@ -399,10 +402,10 @@ Ten pakiet zawiera narzędzie Java Mission Control.
 
 %prep
 %ifarch %{ix86}
-%setup -q -T -b 0 -n jdk%{dir_ver}
+%setup -q -T -b 0 -a4 -n jdk%{dir_ver}
 %endif
 %ifarch %{x8664}
-%setup -q -T -b 1 -n jdk%{dir_ver}
+%setup -q -T -b 1 -a4 -n jdk%{dir_ver}
 %endif
 
 # patch only copy of the desktop file, leave original unchanged
@@ -519,6 +522,9 @@ done
 
 install -d $RPM_BUILD_ROOT%{jredir}/javaws
 ln -sf %{jredir}/lib/javaws.jar $RPM_BUILD_ROOT%{jvmjardir}/javaws.jar
+
+# unrestricted crypto
+cp -a UnlimitedJCEPolicyJDK8/*.jar $RPM_BUILD_ROOT%{jredir}/lib/security
 
 # leave all locale files unchanged in the original location (license
 # restrictions) and only link them at the proper locations
