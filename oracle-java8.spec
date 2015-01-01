@@ -121,20 +121,6 @@ Java Development Kit for Linux.
 %description jdk-base -l pl.UTF-8
 Środowisko programistyczne Javy dla Linuksa.
 
-%package jre-jdbc
-Summary:	JDBC files for Oracle Java
-Summary(pl.UTF-8):	Pliki JDBC dla Javy Oracle
-Group:		Development/Languages/Java
-Requires:	%{name}-jre = %{version}-%{release}
-Requires:	%{name}-jre-base = %{version}-%{release}
-Provides:	%{name}-jdbc
-
-%description jre-jdbc
-This package contains JDBC files for Oracle Java.
-
-%description jre-jdbc -l pl.UTF-8
-Ten pakiet zawiera pliki JDBC dla Javy Oracle.
-
 %package jre
 Summary:	Oracle JRE (Java Runtime Environment) for Linux
 Summary(pl.UTF-8):	Oracle JRE - środowisko uruchomieniowe Javy dla Linuksa
@@ -459,14 +445,14 @@ fi
 
 cp -af jre/{bin,lib} $RPM_BUILD_ROOT%{jredir}
 
-for i in java keytool orbd policytool javaws \
+for i in java jjs keytool orbd policytool javaws \
 	rmid rmiregistry servertool tnameserv pack200 unpack200; do
 	[ -f $RPM_BUILD_ROOT%{jredir}/bin/$i ] || exit 1
 	ln -sf %{jredir}/bin/$i $RPM_BUILD_ROOT%{_bindir}/$i
 done
 
 for i in appletviewer extcheck idlj jar jarsigner \
-	javac javadoc javafxpackager javah javap jcmd jconsole jdb jhat jinfo jmap jmc jps \
+	javac javadoc javafxpackager javah javap javapackager jcmd jconsole jdb jdeps jhat jinfo jmap jmc jps \
 	jrunscript jsadebugd jstack jstat jstatd native2ascii rmic serialver \
 	jvisualvm schemagen wsgen wsimport xjc; do
 	[ -f $RPM_BUILD_ROOT%{javadir}/bin/$i ] || exit 1
@@ -548,6 +534,14 @@ ln -s %{jrereldir} $RPM_BUILD_ROOT%{_jvmdir}/java8-jre
 ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/java
 ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jre
 ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jsse
+
+# ugly hack for libavplugin.so
+perl -pi -e 's#.so.53#.so.56#g' \
+	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin.so
+perl -pi -e 's#LIBAVFORMAT_53#LIBAVFORMAT_56#g' \
+	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin.so
+perl -pi -e 's#LIBAVCODEC_53#LIBAVCODEC_56#g' \
+	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin.so
 
 # modify RPATH so that javac and friends are able to work when /proc is not
 # mounted and we can't append to RPATH (for example to keep previous lookup
@@ -649,9 +643,11 @@ fi
 %attr(755,root,root) %{_bindir}/javafxpackager
 %attr(755,root,root) %{_bindir}/javah
 %attr(755,root,root) %{_bindir}/javap
+%attr(755,root,root) %{_bindir}/javapackager
 %attr(755,root,root) %{_bindir}/jcmd
 %attr(755,root,root) %{_bindir}/jconsole
 %attr(755,root,root) %{_bindir}/jdb
+%attr(755,root,root) %{_bindir}/jdeps
 %attr(755,root,root) %{_bindir}/jhat
 %attr(755,root,root) %{_bindir}/jinfo
 %attr(755,root,root) %{_bindir}/jmap
@@ -675,9 +671,11 @@ fi
 %{_mandir}/man1/javafxpackager.1*
 %{_mandir}/man1/javah.1*
 %{_mandir}/man1/javap.1*
+%{_mandir}/man1/javapackager.1*
 %{_mandir}/man1/jcmd.1*
 %{_mandir}/man1/jconsole.1*
 %{_mandir}/man1/jdb.1*
+%{_mandir}/man1/jdeps.1*
 %{_mandir}/man1/jhat.1*
 %{_mandir}/man1/jinfo.1*
 %{_mandir}/man1/jmap.1*
@@ -701,9 +699,11 @@ fi
 %lang(ja) %{_mandir}/ja/man1/javafxpackager.1*
 %lang(ja) %{_mandir}/ja/man1/javah.1*
 %lang(ja) %{_mandir}/ja/man1/javap.1*
+%lang(ja) %{_mandir}/ja/man1/javapackager.1*
 %lang(ja) %{_mandir}/ja/man1/jcmd.1*
 %lang(ja) %{_mandir}/ja/man1/jconsole.1*
 %lang(ja) %{_mandir}/ja/man1/jdb.1*
+%lang(ja) %{_mandir}/ja/man1/jdeps.1*
 %lang(ja) %{_mandir}/ja/man1/jhat.1*
 %lang(ja) %{_mandir}/ja/man1/jinfo.1*
 %lang(ja) %{_mandir}/ja/man1/jmap.1*
@@ -732,9 +732,11 @@ fi
 %attr(755,root,root) %{javadir}/bin/javafxpackager
 %attr(755,root,root) %{javadir}/bin/javah
 %attr(755,root,root) %{javadir}/bin/javap
+%attr(755,root,root) %{javadir}/bin/javapackager
 %attr(755,root,root) %{javadir}/bin/jcmd
 %attr(755,root,root) %{javadir}/bin/jconsole
 %attr(755,root,root) %{javadir}/bin/jdb
+%attr(755,root,root) %{javadir}/bin/jdeps
 %attr(755,root,root) %{javadir}/bin/jhat
 %attr(755,root,root) %{javadir}/bin/jinfo
 %attr(755,root,root) %{javadir}/bin/jmap
@@ -770,10 +772,6 @@ fi
 %{_mandir}/man1/appletviewer.1*
 %lang(ja) %{_mandir}/ja/man1/appletviewer.1*
 
-#%files jre-jdbc
-#%defattr(644,root,root,755)
-#%attr(755,root,root) %{jredir}/lib/%{arch}/libJdbcOdbc.so
-
 %files jre
 %defattr(644,root,root,755)
 %doc jre/Xusage*
@@ -783,6 +781,7 @@ fi
 %{_jvmjardir}/jre
 %{_jvmjardir}/jsse
 %attr(755,root,root) %{_bindir}/java
+%attr(755,root,root) %{_bindir}/jjs
 %attr(755,root,root) %{_bindir}/keytool
 %attr(755,root,root) %{_bindir}/orbd
 %attr(755,root,root) %{_bindir}/rmid
@@ -791,6 +790,7 @@ fi
 %attr(755,root,root) %{_bindir}/pack200
 %attr(755,root,root) %{_bindir}/unpack200
 %{_mandir}/man1/java.1*
+%{_mandir}/man1/jjs.1*
 %{_mandir}/man1/keytool.1*
 %{_mandir}/man1/orbd.1*
 %{_mandir}/man1/rmid.1*
@@ -799,6 +799,7 @@ fi
 %{_mandir}/man1/*pack200.1*
 %lang(ja) %{_mandir}/ja/man1/*pack200.1*
 %lang(ja) %{_mandir}/ja/man1/java.1*
+%lang(ja) %{_mandir}/ja/man1/jjs.1*
 %lang(ja) %{_mandir}/ja/man1/keytool.1*
 %lang(ja) %{_mandir}/ja/man1/orbd.1*
 %lang(ja) %{_mandir}/ja/man1/rmid.1*
@@ -814,12 +815,14 @@ fi
 %attr(755,root,root) %{javadir}/bin/unpack200
 %attr(755,root,root) %{javadir}/bin/java
 %attr(755,root,root) %{javadir}/bin/jar
+%attr(755,root,root) %{javadir}/bin/jjs
 %attr(755,root,root) %{javadir}/bin/rmic
 %dir %{jredir}
 %dir %{jredir}/bin
 %attr(755,root,root) %{jredir}/bin/pack200
 %attr(755,root,root) %{jredir}/bin/unpack200
 %attr(755,root,root) %{jredir}/bin/java
+%attr(755,root,root) %{jredir}/bin/jjs
 %attr(755,root,root) %{jredir}/bin/keytool
 %attr(755,root,root) %{jredir}/bin/orbd
 %attr(755,root,root) %{jredir}/bin/rmid
@@ -847,17 +850,16 @@ fi
 %attr(755,root,root) %{jredir}/lib/%{arch}/jli/libjli.so
 
 %attr(755,root,root) %{jredir}/lib/%{arch}/lib*.so
-%exclude %{jredir}/lib/%{arch}/libjavaplugin*.so
-%exclude %{jredir}/lib/%{arch}/libJdbcOdbc.so
 %exclude %{jredir}/lib/%{arch}/libjsoundalsa.so
 %exclude %{jredir}/lib/%{arch}/libnpjp2.so
 %exclude %{jredir}/lib/%{arch}/libsplashscreen.so
 %exclude %{jredir}/lib/%{arch}/libglass.so
 %exclude %{jredir}/lib/%{arch}/libgstreamer-lite.so
-%exclude %{jredir}/lib/%{arch}/libgstplugins-lite.so
-%exclude %{jredir}/lib/%{arch}/libjavafx-*.so
+%exclude %{jredir}/lib/%{arch}/libjavafx_*.so
 %exclude %{jredir}/lib/%{arch}/libjfx*.so
-%exclude %{jredir}/lib/%{arch}/libprism-es2.so
+%exclude %{jredir}/lib/%{arch}/libprism_*.so
+%exclude %{jredir}/lib/%{arch}/libfxplugins.so
+%exclude %{jredir}/lib/%{arch}/libavplugin.so
 
 %{jredir}/lib/deploy
 %{jredir}/lib/desktop
@@ -868,10 +870,10 @@ fi
 %{jredir}/lib/security/*.*
 %{jredir}/lib/security/blacklist
 %verify(not md5 mtime size) %config(noreplace) %{jredir}/lib/security/cacerts
-%{jredir}/lib/zi
 %{jredir}/lib/*.jar
-%exclude %{jredir}/lib/jfxrt.jar
+%exclude %{jredir}/lib/ext/jfxrt.jar
 %{jredir}/lib/*.properties
+%{jredir}/lib/tzdb.dat
 %exclude %{jredir}/lib/javafx.properties
 %lang(ja) %{jredir}/lib/*.properties.ja
 %dir %{jvmjardir}
@@ -937,10 +939,9 @@ fi
 %attr(755,root,root) %{javadir}/bin/javaws
 %{jredir}/lib/fonts
 %{jredir}/lib/oblique-fonts
-%dir %{jredir}/lib/%{arch}/xawt
 %attr(755,root,root) %{jredir}/lib/%{arch}/libsplashscreen.so
 %{jvmjardir}/javaws.jar
-%attr(755,root,root) %{jredir}/lib/%{arch}/xawt/libmawt.so
+%attr(755,root,root) %{javadir}/lib/%{arch}/libjawt.so
 %dir %{jredir}/lib/locale
 %lang(de) %{jredir}/lib/locale/de
 %lang(es) %{jredir}/lib/locale/es
@@ -960,16 +961,15 @@ fi
 
 %files javafx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{jredir}/lib/%{arch}/fxavcodecplugin-55.so
-%attr(755,root,root) %{jredir}/lib/%{arch}/fxplugins.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libfxplugins.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libglass.so
-%attr(755,root,root) %{jredir}/lib/%{arch}/libgstplugins-lite.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libgstreamer-lite.so
-%attr(755,root,root) %{jredir}/lib/%{arch}/libjavafx-*.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjavafx_*.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjfx*.so
-%attr(755,root,root) %{jredir}/lib/%{arch}/libprism-es2.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libprism_*.so
 %{jredir}/lib/javafx.properties
-%{jredir}/lib/jfxrt.jar
+%{jredir}/lib/ext/jfxrt.jar
 
 %files visualvm
 %defattr(644,root,root,755)
@@ -1024,7 +1024,6 @@ fi
 %dir %{jredir}/plugin/%{arch}/ns7-gcc29
 %endif
 # XXX: duplicate
-%attr(755,root,root) %{jredir}/lib/%{arch}/libjavaplugin*.so
 %attr(755,root,root) %{jredir}/plugin/%{arch}/*/libjavaplugin_oji.so
 %attr(755,root,root) %{_browserpluginsdir}/libjavaplugin_oji.so
 %{jredir}/plugin/desktop
@@ -1034,7 +1033,6 @@ fi
 %defattr(644,root,root,755)
 %dir %{jredir}/plugin
 # XXX: duplicate
-%attr(755,root,root) %{jredir}/lib/%{arch}/libjavaplugin*.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libnpjp2.so
 %attr(755,root,root) %{_browserpluginsdir}/libnpjp2.so
 %{jredir}/plugin/desktop
