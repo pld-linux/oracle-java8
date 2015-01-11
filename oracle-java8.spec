@@ -112,7 +112,7 @@ Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
-Requires:	jpackage-utils >= 0:1.7.5-4
+Requires:	jpackage-utils >= 0:1.7.5-5
 Provides:	jdk(%{name})
 Obsoletes:	jdk
 
@@ -128,7 +128,7 @@ Summary(pl.UTF-8):	Oracle JRE - środowisko uruchomieniowe Javy dla Linuksa
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 Requires:	%{name}-tools = %{version}-%{release}
-Requires:	jpackage-utils >= 0:1.7.5-4
+Requires:	jpackage-utils >= 0:1.7.5-5
 Suggests:	%{name}-jre-X11
 Provides:	java
 Provides:	java1.4
@@ -152,7 +152,7 @@ w systemie.
 Summary:	Oracle JRE (Java Runtime Environment) for Linux
 Summary(pl.UTF-8):	Oracle JRE - środowisko uruchomieniowe Javy dla Linuksa
 Group:		Development/Languages/Java
-Requires:	jpackage-utils >= 0:1.7.5-4
+Requires:	jpackage-utils >= 0:1.7.5-5
 Provides:	java(ClassDataVersion) = %{_classdataversion}
 Provides:	java(jaas) = %{version}
 Provides:	java(jaf) = 1.1.1
