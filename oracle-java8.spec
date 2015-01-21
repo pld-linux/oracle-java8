@@ -15,14 +15,14 @@
 
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
-%define		src_ver	8u25
+%define		src_ver	8u31
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.25
+Version:	1.8.0.31
 Release:	0.1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -32,9 +32,9 @@ Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 Source0:	jdk-%{src_ver}-linux-i586.tar.gz
-# Source0-md5:	b5b16247f66643727d9b6d4bc7c5efda
+# Source0-md5:	4e9aec24367672412c7d10105a2a2bbb
 Source1:	jdk-%{src_ver}-linux-x64.tar.gz
-# Source1-md5:	e145c03a7edc845215092786bcfba77e
+# Source1-md5:	173e24bc2d5d5ca3469b8e34864a80da
 Source2:	Test.java
 Source3:	Test.class
 # http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
@@ -50,11 +50,9 @@ Requires:	%{name}-jdk-base = %{version}-%{release}
 Requires:	%{name}-jre = %{version}-%{release}
 Requires:	%{name}-jre-base = %{version}-%{release}
 Provides:	j2sdk = %{version}
-Provides:	jdk = %{version}
 Obsoletes:	blackdown-java-sdk
 Obsoletes:	ibm-java
 Obsoletes:	java-blackdown
-Obsoletes:	jdk
 Obsoletes:	kaffe
 Conflicts:	netscape4-plugin-java
 ExclusiveArch:	i586 i686 pentium3 pentium4 athlon %{x8664}
@@ -113,6 +111,7 @@ Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 Requires:	jpackage-utils >= 0:1.7.5-5
+Provides:	jdk = %{version}
 Provides:	jdk(%{name})
 Obsoletes:	jdk
 
