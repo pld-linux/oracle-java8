@@ -50,9 +50,11 @@ Requires:	%{name}-jdk-base = %{version}-%{release}
 Requires:	%{name}-jre = %{version}-%{release}
 Requires:	%{name}-jre-base = %{version}-%{release}
 Provides:	j2sdk = %{version}
+Provides:	jdk = %{version}
 Obsoletes:	blackdown-java-sdk
 Obsoletes:	ibm-java
 Obsoletes:	java-blackdown
+Obsoletes:	jdk
 Obsoletes:	kaffe
 Conflicts:	netscape4-plugin-java
 ExclusiveArch:	i586 i686 pentium3 pentium4 athlon %{x8664}
@@ -111,9 +113,7 @@ Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 Requires:	jpackage-utils >= 0:1.7.5-5
-Provides:	jdk = %{version}
 Provides:	jdk(%{name})
-Obsoletes:	jdk
 
 %description jdk-base
 Java Development Kit for Linux.
