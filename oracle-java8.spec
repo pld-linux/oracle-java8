@@ -15,14 +15,14 @@
 
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
-%define		src_ver	8u31
+%define		src_ver	8u40
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.31
+Version:	1.8.0.40
 Release:	0.1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -32,9 +32,9 @@ Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 Source0:	jdk-%{src_ver}-linux-i586.tar.gz
-# Source0-md5:	4e9aec24367672412c7d10105a2a2bbb
+# Source0-md5:	1c4b119e7f25da30fa1d0ba62deb66f9
 Source1:	jdk-%{src_ver}-linux-x64.tar.gz
-# Source1-md5:	173e24bc2d5d5ca3469b8e34864a80da
+# Source1-md5:	159a3186bb88b77b4eb9ff9971222736
 Source2:	Test.java
 Source3:	Test.class
 # http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
@@ -45,6 +45,7 @@ URL:		http://www.oracle.com/technetwork/java/javase/overview/index.html
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-build >= 4.3-0.20040107.21
 BuildRequires:	rpmbuild(macros) >= 1.453
+BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	%{name}-jdk-base = %{version}-%{release}
 Requires:	%{name}-jre = %{version}-%{release}
@@ -528,12 +529,15 @@ ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jre
 ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jsse
 
 # ugly hack for libavplugin.so
-perl -pi -e 's#.so.53#.so.56#g' \
-	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin.so
-perl -pi -e 's#LIBAVFORMAT_53#LIBAVFORMAT_56#g' \
-	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin.so
-perl -pi -e 's#LIBAVCODEC_53#LIBAVCODEC_56#g' \
-	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin.so
+cp -p $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so \
+	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
+%{__sed} -i -e '
+	s#\.so\.54#.so.56#g
+	s#LIBAVFORMAT_54#LIBAVFORMAT_56#g
+	s#LIBAVCODEC_54#LIBAVCODEC_56#g
+' $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
+rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-53.so
+rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so
 
 # modify RPATH so that javac and friends are able to work when /proc is not
 # mounted and we can't append to RPATH (for example to keep previous lookup
@@ -851,7 +855,7 @@ fi
 %exclude %{jredir}/lib/%{arch}/libjfx*.so
 %exclude %{jredir}/lib/%{arch}/libprism_*.so
 %exclude %{jredir}/lib/%{arch}/libfxplugins.so
-%exclude %{jredir}/lib/%{arch}/libavplugin.so
+%exclude %{jredir}/lib/%{arch}/libavplugin-56.so
 
 %{jredir}/lib/deploy
 %{jredir}/lib/desktop
@@ -953,7 +957,7 @@ fi
 
 %files javafx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin-56.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libfxplugins.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libglass.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libgstreamer-lite.so
