@@ -15,15 +15,15 @@
 
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
-%define		src_ver	8u40
+%define		src_ver	8u45
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.40
-Release:	0.1
+Version:	1.8.0.45
+Release:	1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
 # See "LICENSE TO DISTRIBUTE SOFTWARE" section, which states you can
@@ -32,9 +32,9 @@ Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 Source0:	jdk-%{src_ver}-linux-i586.tar.gz
-# Source0-md5:	1c4b119e7f25da30fa1d0ba62deb66f9
+# Source0-md5:	e68241caf30cb81ae4e985be7218bb6d
 Source1:	jdk-%{src_ver}-linux-x64.tar.gz
-# Source1-md5:	159a3186bb88b77b4eb9ff9971222736
+# Source1-md5:	1ad9a5be748fb75b31cd3bd3aa339cac
 Source2:	Test.java
 Source3:	Test.class
 # http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
