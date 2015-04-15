@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Oracle Java Mission Control
+Type=Application
+Categories=Development;Java;
+Exec=jmc %F
+TryExec=jmc
+StartupNotify=true
+Icon=jmc

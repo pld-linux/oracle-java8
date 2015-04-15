@@ -40,6 +40,7 @@ Source3:	Test.class
 # http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
 Source4:	jce_policy-8.zip
 # Source4-md5:	b3c7031bc65c28c2340302065e7d00d3
+Source5:	jmc.desktop
 Patch0:		%{name}-desktop.patch
 URL:		http://www.oracle.com/technetwork/java/javase/overview/index.html
 BuildRequires:	rpm >= 4.4.9-56
@@ -487,7 +488,10 @@ ln -sf %{jredir}/plugin/%{arch}/ns7/libjavaplugin_oji.so $RPM_BUILD_ROOT%{_brows
 ln -sf %{jredir}/lib/%{arch}/libnpjp2.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 
 cp -a *.desktop $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
 cp -a jre/plugin/desktop/*.png $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p lib/missioncontrol/icon.xpm $RPM_BUILD_ROOT%{_pixmapsdir}/jmc.xpm
+ln -sf %{_pixmapsdir}/jmc.xpm $RPM_BUILD_ROOT%{javadir}/lib/missioncontrol/icon.xpm
 
 ln -sf %{jredir}/lib/jsse.jar $RPM_BUILD_ROOT%{jvmjardir}/jsse.jar
 ln -sf %{jredir}/lib/jsse.jar $RPM_BUILD_ROOT%{jvmjardir}/jcert.jar
@@ -1047,5 +1051,7 @@ fi
 %{jredir}/lib/jfr/default.jfc
 %{jredir}/lib/jfr/profile.jfc
 %{javadir}/lib/missioncontrol
+%{_desktopdir}/jmc.desktop
+%{_pixmapsdir}/jmc.xpm
 %{_mandir}/man1/jmc.1*
 %lang(ja) %{_mandir}/ja/man1/jmc.1*
