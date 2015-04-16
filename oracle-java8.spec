@@ -16,6 +16,7 @@
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
 %define		src_ver	8u45
+%define		bld_ver	b14
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
@@ -31,15 +32,18 @@ License:	restricted, distributable
 Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
-Source0:	jdk-%{src_ver}-linux-i586.tar.gz
-# Source0-md5:	e68241caf30cb81ae4e985be7218bb6d
-Source1:	jdk-%{src_ver}-linux-x64.tar.gz
-# Source1-md5:	1ad9a5be748fb75b31cd3bd3aa339cac
+Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-i586.tar.gz
+# NoSource0-md5:	e68241caf30cb81ae4e985be7218bb6d
+NoSource:	0
+Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-x64.tar.gz
+# NoSource1-md5:	1ad9a5be748fb75b31cd3bd3aa339cac
+NoSource:	1
 Source2:	Test.java
 Source3:	Test.class
 # http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
-Source4:	jce_policy-8.zip
-# Source4-md5:	b3c7031bc65c28c2340302065e7d00d3
+Source4:	http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
+# NoSource4-md5:	b3c7031bc65c28c2340302065e7d00d3
+NoSource:	4
 Source5:	jmc.desktop
 Patch0:		%{name}-desktop.patch
 URL:		http://www.oracle.com/technetwork/java/javase/overview/index.html
