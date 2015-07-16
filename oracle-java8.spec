@@ -10,6 +10,14 @@
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_oji.so
 #       /usr/lib/jvm/java8-1.7.0.11/jre/plugin/desktop/sun_java.desktop
 #       /usr/lib/jvm/java8-1.7.0.11/jre/plugin/desktop/sun_java.png
+# - i686 build does not have these files:
+# error: File not found: /usr/lib/jvm/java8-1.8.0.45/jre/plugin/i386
+# error: File not found: /usr/lib/jvm/java8-1.8.0.45/jre/plugin/i386/ns7
+# error: File not found by glob: /usr/lib/jvm/java8-1.8.0.45/jre/plugin/i386/*/libjavaplugin_oji.so
+# - fix files packaged to multiple packages:
+# warning: File(s) packaged into both browser-plugin-oracle-java8-1.8.0.45-1.i686 and browser-plugin-oracle-java8-ng-1.8.0.45-1.i686:
+#        /usr/lib/jvm/java8-1.8.0.45/jre/plugin/desktop/sun_java.desktop
+#        /usr/lib/jvm/java8-1.8.0.45/jre/plugin/desktop/sun_java.png
 #
 # Conditional build:
 %bcond_without	tests		# build without tests
