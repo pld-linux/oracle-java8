@@ -1,8 +1,9 @@
 # NOTE
-#  - TODO: unpacked files
+#  - TODO: unpacked files/dirs
+#    warning: Unpackaged subdir(s) in oracle-java8-jre-base-1.8.0.51-1.x86_64:
+#    /usr/lib64/jvm/java8-1.8.0.51/lib
 #  - early access packages downloadable: http://jdk6.java.net/download.html
 #  - sample/demo available as separate download, licensesd with Oracle BSD license
-#
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_jni.so
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_nscp.so
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_nscp_gcc29.so
