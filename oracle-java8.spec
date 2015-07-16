@@ -16,7 +16,7 @@
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
 %define		src_ver	8u51
-%define		bld_ver	b14
+%define		bld_ver	b16
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
