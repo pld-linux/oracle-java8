@@ -1,7 +1,4 @@
 # NOTE
-#  - TODO: unpacked files/dirs
-#    warning: Unpackaged subdir(s) in oracle-java8-jre-base-1.8.0.51-1.x86_64:
-#    /usr/lib64/jvm/java8-1.8.0.51/lib
 #  - early access packages downloadable: http://jdk6.java.net/download.html
 #  - sample/demo available as separate download, licensesd with Oracle BSD license
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_jni.so
@@ -24,15 +21,15 @@
 
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
-%define		src_ver	8u51
-%define		bld_ver	b16
+%define		src_ver	8u60
+%define		bld_ver	b27
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.51
+Version:	1.8.0.60
 Release:	1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -42,10 +39,10 @@ Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-i586.tar.gz
-# NoSource0-md5:	742b9151d9190a9ae7d8ed05c7d39850
+# NoSource0-md5:	a46d706babbd63f459d7ca6d4057d80f
 NoSource:	0
 Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-x64.tar.gz
-# NoSource1-md5:	b34ff02c5d98b6f372288c17e96c51cf
+# NoSource1-md5:	b8ca513d4f439782c019cb78cd7fd101
 NoSource:	1
 Source2:	Test.java
 Source3:	Test.class
@@ -772,7 +769,6 @@ fi
 %attr(755,root,root) %{javadir}/bin/wsimport
 %attr(755,root,root) %{javadir}/bin/xjc
 %{javadir}/include
-%dir %{javadir}/lib
 %attr(755,root,root) %{javadir}/lib/jexec
 %{javadir}/lib/ct.sym
 %{javadir}/lib/*.jar
@@ -842,6 +838,7 @@ fi
 %attr(755,root,root) %{jredir}/bin/rmiregistry
 %attr(755,root,root) %{jredir}/bin/servertool
 %attr(755,root,root) %{jredir}/bin/tnameserv
+%dir %{javadir}/lib
 %dir %{jredir}/lib
 %{jredir}/lib/applet
 %{jredir}/lib/cmm
