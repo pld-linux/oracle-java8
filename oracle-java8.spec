@@ -7,10 +7,6 @@
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_oji.so
 #       /usr/lib/jvm/java8-1.7.0.11/jre/plugin/desktop/sun_java.desktop
 #       /usr/lib/jvm/java8-1.7.0.11/jre/plugin/desktop/sun_java.png
-# - i686 build does not have these files:
-# error: File not found: /usr/lib/jvm/java8-1.8.0.45/jre/plugin/i386
-# error: File not found: /usr/lib/jvm/java8-1.8.0.45/jre/plugin/i386/ns7
-# error: File not found by glob: /usr/lib/jvm/java8-1.8.0.45/jre/plugin/i386/*/libjavaplugin_oji.so
 # - fix files packaged to multiple packages:
 # warning: File(s) packaged into both browser-plugin-oracle-java8-1.8.0.45-1.i686 and browser-plugin-oracle-java8-ng-1.8.0.45-1.i686:
 #        /usr/lib/jvm/java8-1.8.0.45/jre/plugin/desktop/sun_java.desktop
@@ -1028,13 +1024,6 @@ fi
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
 %dir %{jredir}/plugin
-%dir %{jredir}/plugin/%{arch}
-%dir %{jredir}/plugin/%{arch}/ns7
-%ifarch %{x8664}
-%dir %{jredir}/plugin/%{arch}/ns7-gcc29
-%endif
-# XXX: duplicate
-%attr(755,root,root) %{jredir}/plugin/%{arch}/*/libjavaplugin_oji.so
 %attr(755,root,root) %{_browserpluginsdir}/libjavaplugin_oji.so
 %{jredir}/plugin/desktop
 %endif
@@ -1042,7 +1031,6 @@ fi
 %files -n browser-plugin-%{name}-ng
 %defattr(644,root,root,755)
 %dir %{jredir}/plugin
-# XXX: duplicate
 %attr(755,root,root) %{jredir}/lib/%{arch}/libnpjp2.so
 %attr(755,root,root) %{_browserpluginsdir}/libnpjp2.so
 %{jredir}/plugin/desktop
