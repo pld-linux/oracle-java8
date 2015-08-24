@@ -488,7 +488,7 @@ cp -a jre/plugin $RPM_BUILD_ROOT%{jredir}
 
 # Install plugin for browsers
 # Plugin in regular location simply does not work (is seen by browsers):
-%ifarch %{ix86}
+%ifarch 0
 ln -sf %{jredir}/plugin/%{arch}/ns7/libjavaplugin_oji.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 %endif
 ln -sf %{jredir}/lib/%{arch}/libnpjp2.so $RPM_BUILD_ROOT%{_browserpluginsdir}
@@ -1020,7 +1020,7 @@ fi
 %lang(ja) %{_mandir}/ja/man1/rmic.1*
 %lang(ja) %{_mandir}/ja/man1/rmiregistry.1*
 
-%ifarch %{ix86}
+%if 0
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
 %dir %{jredir}/plugin
