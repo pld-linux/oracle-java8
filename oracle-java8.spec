@@ -11,6 +11,9 @@
 # warning: File(s) packaged into both browser-plugin-oracle-java8-1.8.0.45-1.i686 and browser-plugin-oracle-java8-ng-1.8.0.45-1.i686:
 #        /usr/lib/jvm/java8-1.8.0.45/jre/plugin/desktop/sun_java.desktop
 #        /usr/lib/jvm/java8-1.8.0.45/jre/plugin/desktop/sun_java.png
+# - subpackage or obsolete/provide?:
+#        file /usr/bin/javaws from install of icedtea-web-1.6.1-1.x86_64 conflicts with file from package oracle-java8-jre-X11-1.8.0.66-1.x86_64
+#        file /usr/share/man/man1/javaws.1.gz from install of icedtea-web-1.6.1-1.x86_64 conflicts with file from package oracle-java8-jre-X11-1.8.0.66-1.x86_64
 #
 # Conditional build:
 %bcond_without	tests		# build without tests
