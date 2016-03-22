@@ -543,12 +543,12 @@ ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jsse
 
 # ugly hack for libavplugin.so
 cp -p $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so \
-	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
+	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
 %{__sed} -i -e '
-	s#\.so\.54#.so.56#g
-	s#LIBAVFORMAT_54#LIBAVFORMAT_56#g
-	s#LIBAVCODEC_54#LIBAVCODEC_56#g
-' $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
+	s#\.so\.54#.so.57#g
+	s#LIBAVFORMAT_54#LIBAVFORMAT_57#g
+	s#LIBAVCODEC_54#LIBAVCODEC_57#g
+' $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-53.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so
 
@@ -868,7 +868,7 @@ fi
 %exclude %{jredir}/lib/%{arch}/libjfx*.so
 %exclude %{jredir}/lib/%{arch}/libprism_*.so
 %exclude %{jredir}/lib/%{arch}/libfxplugins.so
-%exclude %{jredir}/lib/%{arch}/libavplugin-56.so
+%exclude %{jredir}/lib/%{arch}/libavplugin-57.so
 
 %{jredir}/lib/deploy
 %{jredir}/lib/desktop
@@ -970,7 +970,7 @@ fi
 
 %files javafx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin-56.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin-57.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libfxplugins.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libglass.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libgstreamer-lite.so
