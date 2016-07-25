@@ -20,15 +20,15 @@
 
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
-%define		src_ver	8u92
+%define		src_ver	8u102
 %define		bld_ver	b14
-%define		dir_ver	%(echo %{version} | sed 's/\\.\\(..\\)$/_\\1/')
+%define		dir_ver	%(echo %{version} | sed 's/\\.\\([^.]\\+\\)$/_\\1/')
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.92
+Version:	1.8.0.102
 Release:	1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -38,10 +38,10 @@ Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-i586.tar.gz
-# NoSource0-md5:	0f2839ff1066438123dac3404702a3ef
+# NoSource0-md5:	13ca2f1c15a71dde4e57436d5ce671f8
 NoSource:	0
 Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-x64.tar.gz
-# NoSource1-md5:	65a1cc17ea362453a6e0eb4f13be76e4
+# NoSource1-md5:	bac58dcec9bb85859810a2a6acba740b
 NoSource:	1
 Source2:	Test.java
 Source3:	Test.class
@@ -542,15 +542,18 @@ ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jre
 ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jsse
 
 # ugly hack for libavplugin.so
-cp -p $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so \
+cp -p $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so \
 	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
 %{__sed} -i -e '
-	s#\.so\.54#.so.57#g
-	s#LIBAVFORMAT_54#LIBAVFORMAT_57#g
-	s#LIBAVCODEC_54#LIBAVCODEC_57#g
+	s#\.so\.56#.so.57#g
+	s#LIBAVFORMAT_56#LIBAVFORMAT_57#g
+	s#LIBAVCODEC_56#LIBAVCODEC_57#g
 ' $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-53.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so
+rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-55.so
+rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
+rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-ffmpeg-56.so
 
 # modify RPATH so that javac and friends are able to work when /proc is not
 # mounted and we can't append to RPATH (for example to keep previous lookup
@@ -564,7 +567,7 @@ rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so
 chrpath -d $RPM_BUILD_ROOT%{jredir}/bin/unpack200
 
 fixrpath() {
-	execlist=$(find $RPM_BUILD_ROOT%{javadir} -type f -perm +1 | xargs file | awk -F: '/ELF.*executable/{print $1}')
+	execlist=$(find $RPM_BUILD_ROOT%{javadir} -type f -executable | xargs file | awk -F: '/ELF.*executable/{print $1}')
 	for f in $execlist; do
 		rpath=$(chrpath -l $f | awk '/(R|RUN)PATH=/ { gsub(/.*RPATH=/,""); gsub(/.*RUNPATH=/,""); gsub(/:/," "); print $0 }')
 		[ "$rpath" ] || continue
