@@ -1,4 +1,6 @@
 # NOTE
+#  - jre-base should not pull X11 deps:
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks gtk+2-2.24.31-1.x86_64 (cap libgdk-x11-2.0.so.0()(64bit))
 #  - early access packages downloadable: http://jdk6.java.net/download.html
 #  - sample/demo available as separate download, licensesd with Oracle BSD license
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_jni.so
