@@ -1,6 +1,16 @@
 # NOTE
 #  - jre-base should not pull X11 deps:
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks atk-2.22.0-1.x86_64 (cap libatk-1.0.so.0()(64bit))
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks cairo-1.14.6-5.x86_64 (cap libcairo.so.2()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks gtk+2-2.24.31-1.x86_64 (cap libgdk-x11-2.0.so.0()(64bit))
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks gtk+2-2.24.31-1.x86_64 (cap libgdk-x11-2.0.so.0()(64bit))
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libX11-1.6.4-1.x86_64 (cap libX11.so.6()(64bit))
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXext-1.3.3-2.x86_64 (cap libXext.so.6()(64bit))
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXi-1.7.7-1.x86_64 (cap libXi.so.6()(64bit))
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXrender-0.9.10-1.x86_64 (cap libXrender.so.1()(64bit))
+#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXtst-1.2.3-1.x86_64 (cap libXtst.so.6()(64bit))
+#       gtk+2-2.24.31-1.x86_64 marks gtk-update-icon-cache-3.22.1-1.x86_64 (cap gtk-update-icon-cache)
+#        gtk-update-icon-cache-3.22.1-1.x86_64 marks gtk+3-3.22.1-1.x86_64 (cap libgdk-3.so.0()(64bit))
 #  - early access packages downloadable: http://jdk6.java.net/download.html
 #  - sample/demo available as separate download, licensesd with Oracle BSD license
 #       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_jni.so
