@@ -35,6 +35,7 @@
 %define		src_ver	8u121
 %define		bld_ver	b13
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\([^.]\\+\\)$/_\\1/')
+%define		bhash	e9e7ea248e2c4826b92b3f075a80e441
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
@@ -49,10 +50,11 @@ License:	restricted, distributable
 Group:		Development/Languages/Java
 # Download URL (requires JavaScript and interactive license agreement):
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
-Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-i586.tar.gz
+# Use get-source.sh script to download locally.
+Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-i586.tar.gz
 # NoSource0-md5:	9e0e84f36427ce258abfca35fbeb0c55
 NoSource:	0
-Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/jdk-%{src_ver}-linux-x64.tar.gz
+Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-x64.tar.gz
 # NoSource1-md5:	91972fb4e753f1b6674c2b952d974320
 NoSource:	1
 Source2:	Test.java
