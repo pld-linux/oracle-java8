@@ -108,6 +108,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # binary packages already stripped
 %define		_enable_debug_packages 0
 
+# disable stripping which breaks ie jmap -heap <pid>
+# Caused by: java.lang.RuntimeException: unknown CollectedHeap type : class sun.jvm.hotspot.gc_interface.CollectedHeap
+%define		no_install_post_strip	1
+
 %description
 This package symlinks Oracle Java development tools provided by
 java8-jdk-base to system-wide directories like /usr/bin, making Oracle
