@@ -32,16 +32,16 @@
 
 # disable file duplicate packaging error
 %define		_duplicate_files_terminate_build   0
-%define		src_ver	8u162
-%define		bld_ver	b12
+%define		src_ver	8u172
+%define		bld_ver	b11
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\([^.]\\+\\)$/_\\1/')
-%define		bhash	0da788060d494f5095bf8624735fa2f1
+%define		bhash	a58eab1ec242421181065cdc37240b08
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.162
+Version:	1.8.0.172
 Release:	1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -52,10 +52,10 @@ Group:		Development/Languages/Java
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 # Use get-source.sh script to download locally.
 Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-i586.tar.gz
-# NoSource0-md5:	94e3be6c990e2866b87fb1b71bca6428
+# NoSource0-md5:	0462f605ca1a558a0a95c52d46127071
 NoSource:	0
 Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-x64.tar.gz
-# NoSource1-md5:	781e3779f0c134fb548bde8b8e715e90
+# NoSource1-md5:	eda2945e8c02b84adbf78f46c37b71c1
 NoSource:	1
 Source2:	Test.java
 Source3:	Test.class
