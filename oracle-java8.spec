@@ -560,18 +560,20 @@ ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jre
 ln -s java8-%{version} $RPM_BUILD_ROOT%{_jvmjardir}/jsse
 
 # ugly hack for libavplugin.so
-cp -p $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so \
-	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
+cp -p -n $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so \
+	$RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-58.so
 %{__sed} -i -e '
-	s#\.so\.56#.so.57#g
-	s#LIBAVFORMAT_56#LIBAVFORMAT_57#g
-	s#LIBAVCODEC_56#LIBAVCODEC_57#g
-' $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
+	s#\.so\.57#.so.58#g
+	s#LIBAVFORMAT_57#LIBAVFORMAT_58#g
+	s#LIBAVCODEC_57#LIBAVCODEC_58#g
+' $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-58.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-53.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-55.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
+rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
 rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-ffmpeg-56.so
+rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-ffmpeg-57.so
 
 # modify RPATH so that javac and friends are able to work when /proc is not
 # mounted and we can't append to RPATH (for example to keep previous lookup
@@ -889,7 +891,7 @@ fi
 %exclude %{jredir}/lib/%{arch}/libjfx*.so
 %exclude %{jredir}/lib/%{arch}/libprism_*.so
 %exclude %{jredir}/lib/%{arch}/libfxplugins.so
-%exclude %{jredir}/lib/%{arch}/libavplugin-57.so
+%exclude %{jredir}/lib/%{arch}/libavplugin-58.so
 
 %{jredir}/lib/deploy
 %{jredir}/lib/desktop
@@ -992,7 +994,7 @@ fi
 
 %files javafx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin-57.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin-58.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libfxplugins.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libglass.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libgstreamer-lite.so
