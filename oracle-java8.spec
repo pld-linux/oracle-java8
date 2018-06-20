@@ -30,8 +30,6 @@
 # Conditional build:
 %bcond_without	tests		# build without tests
 
-# disable file duplicate packaging error
-%define		_duplicate_files_terminate_build   0
 %define		src_ver	8u172
 %define		bld_ver	b11
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\([^.]\\+\\)$/_\\1/')
@@ -73,7 +71,6 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	%{name}-jdk-base = %{version}-%{release}
 Requires:	%{name}-jre = %{version}-%{release}
-Requires:	%{name}-jre-base = %{version}-%{release}
 Provides:	j2sdk = %{version}
 Provides:	jdk = %{version}
 Obsoletes:	blackdown-java-sdk
@@ -251,7 +248,8 @@ JRE module for ALSA sound support.
 Moduł JRE do obsługi dźwięku poprzez ALSA.
 
 %package javafx
-Summary:	Oracle JRE (Java Runtime Environment) for Linux - JavaFX runtime binaries
+Summary:	Oracle JRE for Linux - JavaFX runtime binaries
+Summary(pl.UTF-8):	Oracle JRE dla Linuksa - binaria uruchomieniowe JavaFX
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 
@@ -263,6 +261,15 @@ applications. With JavaFX, developers can preserve existing
 investments by reusing Java libraries in their applications. They can
 even access native system capabilities, or seamlessly connect to
 server-based middleware applications.
+
+%description javafx -l pl.UTF-8
+JavaFX to kolejny krok ewolucji Javy jako bogatej platformy
+klienckiej. Jest zaprojektowana jako lekka, akcelerowana sprzętowo
+platforma interfejsu użytkownika Javy dla aplikacji biznesowych. Przy
+pomocy JavaFX programiści mogą zachować istniejące nakłady poprzez
+ponowne używanie bibliotek Javy w aplikacjach. Mogą także mieć dostęp
+do natywnych możliwości systemu lub w sposób przezroczysty łączyć się
+z aplikacjami middleware opartymi na serwerach.
 
 %package visualvm
 Summary:	VisualVM - a tool to monitor and troubleshoot Java applications
@@ -455,13 +462,13 @@ cp -p man/man1/* $RPM_BUILD_ROOT%{_mandir}/man1
 cp -p man/ja/man1/* $RPM_BUILD_ROOT%{_mandir}/ja/man1
 
 if test -f jre/lib/%{arch}/client/Xusage.txt; then
-	mv -f jre/lib/%{arch}/client/Xusage.txt jre/Xusage.client
+	%{__mv} jre/lib/%{arch}/client/Xusage.txt jre/Xusage.client
 fi
 if test -f jre/lib/%{arch}/server/Xusage.txt; then
-	mv -f jre/lib/%{arch}/server/Xusage.txt jre/Xusage.server
+	%{__mv} jre/lib/%{arch}/server/Xusage.txt jre/Xusage.server
 fi
 if test -f jre/lib/*.txt; then
-	mv -f jre/lib/*.txt jre
+	%{__mv} jre/lib/*.txt jre
 fi
 
 cp -af jre/{bin,lib} $RPM_BUILD_ROOT%{jredir}
@@ -545,9 +552,9 @@ for loc in $(ls $RPM_BUILD_ROOT%{jredir}/lib/locale); do
 done
 
 # standardize dir names
-mv -f $RPM_BUILD_ROOT%{_localedir}/{zh,zh_CN}
-mv -f $RPM_BUILD_ROOT%{_localedir}/{zh_HK.BIG5HK,zh_HK}
-rm -rf $RPM_BUILD_ROOT%{_localedir}/{ko.UTF-8,zh.GBK,zh_TW.BIG5}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{zh,zh_CN}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{zh_HK.BIG5HK,zh_HK}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{ko.UTF-8,zh.GBK,zh_TW.BIG5}
 
 cp -a src.zip $RPM_BUILD_ROOT%{_prefix}/src/%{name}-sources
 
@@ -567,13 +574,13 @@ cp -p -n $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so \
 	s#LIBAVFORMAT_57#LIBAVFORMAT_58#g
 	s#LIBAVCODEC_57#LIBAVCODEC_58#g
 ' $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-58.so
-rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-53.so
-rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so
-rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-55.so
-rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
-rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
-rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-ffmpeg-56.so
-rm $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-ffmpeg-57.so
+%{__rm} $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-53.so
+%{__rm} $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-54.so
+%{__rm} $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-55.so
+%{__rm} $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-56.so
+%{__rm} $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-57.so
+%{__rm} $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-ffmpeg-56.so
+%{__rm} $RPM_BUILD_ROOT%{jredir}/lib/%{arch}/libavplugin-ffmpeg-57.so
 
 # modify RPATH so that javac and friends are able to work when /proc is not
 # mounted and we can't append to RPATH (for example to keep previous lookup
@@ -630,7 +637,6 @@ cat <<EOF >> $RPM_BUILD_ROOT%{javadir}/bin/jmc.ini
 -Dorg.eclipse.swt.browser.DefaultType=mozilla
 -Dorg.eclipse.swt.browser.XULRunnerPath=%{_libdir}/xulrunner/
 EOF
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -860,7 +866,6 @@ fi
 %attr(755,root,root) %{jredir}/bin/rmiregistry
 %attr(755,root,root) %{jredir}/bin/servertool
 %attr(755,root,root) %{jredir}/bin/tnameserv
-%dir %{javadir}/lib
 %dir %{jredir}/lib
 %{jredir}/lib/applet
 %{jredir}/lib/cmm
@@ -875,6 +880,7 @@ fi
 %dir %{jredir}/lib/%{arch}/client
 %attr(755,root,root) %{jredir}/lib/%{arch}/client/*
 %endif
+%dir %{javadir}/lib
 %dir %{javadir}/lib/%{arch}
 %dir %{javadir}/lib/%{arch}/jli
 %attr(755,root,root) %{javadir}/lib/%{arch}/jli/libjli.so
@@ -982,6 +988,7 @@ fi
 %lang(it) %{jredir}/lib/locale/it
 %lang(ja) %{jredir}/lib/locale/ja
 %lang(ko) %{jredir}/lib/locale/ko*
+%lang(pt_BR) %{jredir}/lib/locale/pt_BR
 %lang(sv) %{jredir}/lib/locale/sv
 %lang(zh_CN) %{jredir}/lib/locale/zh
 %lang(zh_CN) %{jredir}/lib/locale/zh.*
