@@ -1,15 +1,10 @@
 # NOTE
 #  - jre-base should not pull X11 deps:
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks atk-2.22.0-1.x86_64 (cap libatk-1.0.so.0()(64bit))
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks cairo-1.14.6-5.x86_64 (cap libcairo.so.2()(64bit))
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks gtk+2-2.24.31-1.x86_64 (cap libgdk-x11-2.0.so.0()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libX11-1.6.4-1.x86_64 (cap libX11.so.6()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXext-1.3.3-2.x86_64 (cap libXext.so.6()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXi-1.7.7-1.x86_64 (cap libXi.so.6()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXrender-0.9.10-1.x86_64 (cap libXrender.so.1()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXtst-1.2.3-1.x86_64 (cap libXtst.so.6()(64bit))
-#       gtk+2-2.24.31-1.x86_64 marks gtk-update-icon-cache-3.22.1-1.x86_64 (cap gtk-update-icon-cache)
-#        gtk-update-icon-cache-3.22.1-1.x86_64 marks gtk+3-3.22.1-1.x86_64 (cap libgdk-3.so.0()(64bit))
 #  - sample/demo available as separate download, licensed with Oracle BSD license
 #  - subpackage or obsolete/provide?:
 #        file /usr/bin/javaws from install of icedtea-web-1.6.1-1.x86_64 conflicts with file from package oracle-java8-jre-X11-1.8.0.66-1.x86_64
@@ -875,17 +870,44 @@ fi
 %dir %{jredir}/lib/%{arch}/jli
 %attr(755,root,root) %{jredir}/lib/%{arch}/jli/libjli.so
 
-%attr(755,root,root) %{jredir}/lib/%{arch}/lib*.so
-%exclude %{jredir}/lib/%{arch}/libjsoundalsa.so
-%exclude %{jredir}/lib/%{arch}/libnpjp2.so
-%exclude %{jredir}/lib/%{arch}/libsplashscreen.so
-%exclude %{jredir}/lib/%{arch}/libglass.so
-%exclude %{jredir}/lib/%{arch}/libgstreamer-lite.so
-%exclude %{jredir}/lib/%{arch}/libjavafx_*.so
-%exclude %{jredir}/lib/%{arch}/libjfx*.so
-%exclude %{jredir}/lib/%{arch}/libprism_*.so
-%exclude %{jredir}/lib/%{arch}/libfxplugins.so
-%exclude %{jredir}/lib/%{arch}/libavplugin-58.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libattach.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libawt*.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libbci.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libdcpr.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libdeploy.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libdt_socket.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libfontmanager.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libhprof.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libinstrument.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libj2gss.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libj2pcsc.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libj2pkcs11.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjaas_unix.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjava.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjava_crw_demo.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjawt.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjdwp.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjfr.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjpeg.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjsdt.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjsig.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjsound.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjvm.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libkcms.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/liblcms.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libmanagement.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libmlib_image.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libnet.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libnio.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libnpt.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libresource.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libsaproc.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libsctp.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libsunec.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libt2k.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libunpack.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libverify.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libzip.so
 
 %{jredir}/lib/deploy
 %{jredir}/lib/desktop
@@ -966,6 +988,7 @@ fi
 %attr(755,root,root) %{javadir}/bin/javaws
 %{jredir}/lib/fonts
 %{jredir}/lib/oblique-fonts
+%attr(755,root,root) %{jredir}/lib/%{arch}/libdecora_sse.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libsplashscreen.so
 %{jvmjardir}/javaws.jar
 %attr(755,root,root) %{javadir}/lib/%{arch}/libjawt.so
