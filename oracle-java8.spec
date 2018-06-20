@@ -3,7 +3,6 @@
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks atk-2.22.0-1.x86_64 (cap libatk-1.0.so.0()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks cairo-1.14.6-5.x86_64 (cap libcairo.so.2()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks gtk+2-2.24.31-1.x86_64 (cap libgdk-x11-2.0.so.0()(64bit))
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks gtk+2-2.24.31-1.x86_64 (cap libgdk-x11-2.0.so.0()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libX11-1.6.4-1.x86_64 (cap libX11.so.6()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXext-1.3.3-2.x86_64 (cap libXext.so.6()(64bit))
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXi-1.7.7-1.x86_64 (cap libXi.so.6()(64bit))
@@ -11,19 +10,8 @@
 #      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXtst-1.2.3-1.x86_64 (cap libXtst.so.6()(64bit))
 #       gtk+2-2.24.31-1.x86_64 marks gtk-update-icon-cache-3.22.1-1.x86_64 (cap gtk-update-icon-cache)
 #        gtk-update-icon-cache-3.22.1-1.x86_64 marks gtk+3-3.22.1-1.x86_64 (cap libgdk-3.so.0()(64bit))
-#  - early access packages downloadable: http://jdk6.java.net/download.html
-#  - sample/demo available as separate download, licensesd with Oracle BSD license
-#       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_jni.so
-#       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_nscp.so
-#       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_nscp_gcc29.so
-#       /usr/lib/jvm/java8-1.7.0.11/jre/lib/i386/libjavaplugin_oji.so
-#       /usr/lib/jvm/java8-1.7.0.11/jre/plugin/desktop/sun_java.desktop
-#       /usr/lib/jvm/java8-1.7.0.11/jre/plugin/desktop/sun_java.png
-# - fix files packaged to multiple packages:
-# warning: File(s) packaged into both browser-plugin-oracle-java8-1.8.0.45-1.i686 and browser-plugin-oracle-java8-ng-1.8.0.45-1.i686:
-#        /usr/lib/jvm/java8-1.8.0.45/jre/plugin/desktop/sun_java.desktop
-#        /usr/lib/jvm/java8-1.8.0.45/jre/plugin/desktop/sun_java.png
-# - subpackage or obsolete/provide?:
+#  - sample/demo available as separate download, licensed with Oracle BSD license
+#  - subpackage or obsolete/provide?:
 #        file /usr/bin/javaws from install of icedtea-web-1.6.1-1.x86_64 conflicts with file from package oracle-java8-jre-X11-1.8.0.66-1.x86_64
 #        file /usr/share/man/man1/javaws.1.gz from install of icedtea-web-1.6.1-1.x86_64 conflicts with file from package oracle-java8-jre-X11-1.8.0.66-1.x86_64
 #
