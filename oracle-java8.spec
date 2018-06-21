@@ -1,10 +1,4 @@
 # NOTE
-#  - jre-base should not pull X11 deps:
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libX11-1.6.4-1.x86_64 (cap libX11.so.6()(64bit))
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXext-1.3.3-2.x86_64 (cap libXext.so.6()(64bit))
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXi-1.7.7-1.x86_64 (cap libXi.so.6()(64bit))
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXrender-0.9.10-1.x86_64 (cap libXrender.so.1()(64bit))
-#      oracle-java8-jre-base-1.8.0.112-1.x86_64 marks xorg-lib-libXtst-1.2.3-1.x86_64 (cap libXtst.so.6()(64bit))
 #  - sample/demo available as separate download, licensed with Oracle BSD license
 #  - subpackage or obsolete/provide?:
 #        file /usr/bin/javaws from install of icedtea-web-1.6.1-1.x86_64 conflicts with file from package oracle-java8-jre-X11-1.8.0.66-1.x86_64
@@ -871,7 +865,8 @@ fi
 %attr(755,root,root) %{jredir}/lib/%{arch}/jli/libjli.so
 
 %attr(755,root,root) %{jredir}/lib/%{arch}/libattach.so
-%attr(755,root,root) %{jredir}/lib/%{arch}/libawt*.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libawt.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libawt_headless.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libbci.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libdcpr.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libdeploy.so
@@ -885,7 +880,6 @@ fi
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjaas_unix.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjava.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjava_crw_demo.so
-%attr(755,root,root) %{jredir}/lib/%{arch}/libjawt.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjdwp.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjfr.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjpeg.so
@@ -988,7 +982,9 @@ fi
 %attr(755,root,root) %{javadir}/bin/javaws
 %{jredir}/lib/fonts
 %{jredir}/lib/oblique-fonts
+%attr(755,root,root) %{jredir}/lib/%{arch}/libawt_xawt.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libdecora_sse.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libjawt.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libsplashscreen.so
 %{jvmjardir}/javaws.jar
 %attr(755,root,root) %{javadir}/lib/%{arch}/libjawt.so
