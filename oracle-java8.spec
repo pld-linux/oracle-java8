@@ -7,16 +7,16 @@
 # Conditional build:
 %bcond_without	tests		# build without tests
 
-%define		src_ver	8u172
-%define		bld_ver	b11
+%define		src_ver	8u181
+%define		bld_ver	b13
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\([^.]\\+\\)$/_\\1/')
-%define		bhash	a58eab1ec242421181065cdc37240b08
+%define		bhash	96a7b8442fe848ef90c96a2fad6ed6d1
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.172
+Version:	1.8.0.181
 Release:	1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -27,10 +27,10 @@ Group:		Development/Languages/Java
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 # Use get-source.sh script to download locally.
 Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-i586.tar.gz
-# NoSource0-md5:	0462f605ca1a558a0a95c52d46127071
+# NoSource0-md5:	765539c51490081b1eb27382dd7e96b3
 NoSource:	0
 Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-x64.tar.gz
-# NoSource1-md5:	eda2945e8c02b84adbf78f46c37b71c1
+# NoSource1-md5:	ef599e322eee42f6769991dd3e3b1a31
 NoSource:	1
 Source2:	Test.java
 Source3:	Test.class
