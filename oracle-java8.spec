@@ -7,16 +7,16 @@
 # Conditional build:
 %bcond_without	tests		# build without tests
 
-%define		src_ver	8u192
-%define		bld_ver	b12
+%define		src_ver	8u202
+%define		bld_ver	b08
 %define		dir_ver	%(echo %{version} | sed 's/\\.\\([^.]\\+\\)$/_\\1/')
-%define		bhash	750e1c8617c5452694857ad95c3ee230
+%define		bhash	1961070e4c9b4e26a04e7f5a083f551e
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 52.0
 Summary:	Oracle JDK (Java Development Kit) for Linux
 Summary(pl.UTF-8):	Oracle JDK - środowisko programistyczne Javy dla Linuksa
 Name:		oracle-java8
-Version:	1.8.0.192
+Version:	1.8.0.202
 Release:	1
 License:	restricted, distributable
 # http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -27,10 +27,10 @@ Group:		Development/Languages/Java
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 # Use get-source.sh script to download locally.
 Source0:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-i586.tar.gz
-# NoSource0-md5:	21a498e710233dcd40b089566a726751
+# NoSource0-md5:	ddae517017646fc180d5241260d515e8
 NoSource:	0
 Source1:	http://download.oracle.com/otn-pub/java/jdk/%{src_ver}-%{bld_ver}/%{bhash}/jdk-%{src_ver}-linux-x64.tar.gz
-# NoSource1-md5:	6f1961691877db56bf124d6f50478956
+# NoSource1-md5:	0029351f7a946f6c05b582100c7d45b7
 NoSource:	1
 Source2:	Test.java
 Source3:	Test.class
@@ -887,7 +887,6 @@ fi
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjsig.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjsound.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjvm.so
-%attr(755,root,root) %{jredir}/lib/%{arch}/libkcms.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/liblcms.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libmanagement.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libmlib_image.so
@@ -1011,6 +1010,8 @@ fi
 %attr(755,root,root) %{jredir}/lib/%{arch}/libavplugin-58.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libfxplugins.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libglass.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libglassgtk2.so
+%attr(755,root,root) %{jredir}/lib/%{arch}/libglassgtk3.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libglib-lite.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libgstreamer-lite.so
 %attr(755,root,root) %{jredir}/lib/%{arch}/libjavafx_*.so
