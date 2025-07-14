@@ -401,7 +401,7 @@ Ten pakiet zawiera narzędzie Java Mission Control.
 
 # patch only copy of the desktop file, leave original unchanged
 cp -p jre/plugin/desktop/sun_java.desktop .
-%patch0 -p1
+%patch -P0 -p1
 
 cp -p %{SOURCE2} Test.java
 cp -p %{SOURCE3} Test.class
